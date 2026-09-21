@@ -1,228 +1,233 @@
-import { useState } from "react";
-import { Phone, Mail, MapPin, Clock, Calendar, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import React, { useState } from "react";
+import { MapPin, Phone, Clock, ExternalLink, Calendar, Send, CheckCircle2 } from "lucide-react";
 
-const whatsappNumber = "919625665226";
+// 1. Array of Clinic Locations
+const locations = [
+  {
+    id: "sangam-vihar",
+    branchName: "Sangam Vihar Branch",
+    city: "New Delhi",
+    address: "H-16, Ground Floor, 173, Ratiya Marg, Near Hera Public School & Jain Mandir",
+    fullCityState: "Sangam Vihar, New Delhi, Delhi 110080",
+    phone: "+91 98765 43210", // Update with actual contact number
+    mapUrl: "https://maps.google.com/?q=H-16+Ground+Floor+173+Ratiya+Marg+Sangam+Vihar+New+Delhi",
+    hours: "Mon - Sat: 10:00 AM - 8:00 PM | Sun: By Appointment",
+  },
+  {
+    id: "noida-extension",
+    branchName: "Greater Noida Branch",
+    city: "Noida Extension",
+    address: "Ambesten Twin City Walk, Sector 1, Extension, Bisrakh Jalalpur",
+    fullCityState: "Noida, Greater Noida, Uttar Pradesh 201318",
+    phone: "+91 98765 43211", // Update with actual contact number
+    mapUrl: "https://maps.app.goo.gl/4bhhQkfqMD12PKpC7?g_st=awb",
+    hours: "Mon - Sat: 10:00 AM - 8:00 PM | Sun: Closed",
+  },
+];
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    branch: locations[0].id,
     date: "",
-    concern: "",
+    message: "",
   });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleWhatsApp = () => {
-    if (!formData.name || !formData.phone || !formData.date) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
-
-    const whatsappNumber = "919625665226";
-    const message = encodeURIComponent(
-      `Hello,
-
-I would like to book an appointment at Dr. Sandeep Dental Hub .
-
-Name: ${formData.name}
-
-Phone: ${formData.phone}
-
-Preferred Date: ${formData.date}
-
-Concern: ${formData.concern || "Not specified"}`,
-    );
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
-    toast.success("Opening WhatsApp to send your appointment request!");
-
-    // Reset form
-    setFormData({
-      name: "",
-      phone: "",
-      date: "",
-      concern: "",
-    });
-  };
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleWhatsApp();
-  };
-
-  // Get tomorrow's date as minimum selectable date
-  const getTomorrowDate = () => {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    return tomorrow.toISOString().split("T")[0];
+    // Connect to your email API or backend logic here
+    setSubmitted(true);
   };
 
   return (
-    <section id="contact" className="section-padding bg-secondary/30">
-      <div className="container-custom mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Info */}
-          <div className="space-y-8 animate-fade-up">
-            <div>
-              <span className="text-primary font-medium uppercase tracking-wider text-sm">Get in Touch</span>
-              <h2 className="font-display text-4xl md:text-5xl font-semibold text-foreground mt-4 mb-6">
-                Let's Start Your Smile Journey
-              </h2>
-              <p className="text-muted-foreground text-lg">
-                Ready to experience exceptional dental care? Contact us today to schedule your appointment or ask any
-                questions.
-              </p>
-            </div>
+    <section id="contact" className="py-16 md:py-24 bg-background">
+      <div className="container-custom mx-auto px-4 md:px-8">
+        
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
+            Contact & Appointments
+          </div>
+          <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground leading-tight">
+            Visit Our Clinics or Book an Appointment
+          </h2>
+          <p className="text-muted-foreground text-base md:text-lg mt-4">
+            Dr. Sandeep Mallik provides comprehensive dental care across two modern clinic locations in New Delhi and Greater Noida.
+          </p>
+        </div>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5 text-primary" />
+        {/* Top: Multi-Location Cards */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
+          {locations.map((loc) => (
+            <div
+              key={loc.id}
+              className="bg-card p-6 md:p-8 rounded-2xl border border-border/60 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-6"
+            >
+              <div className="space-y-4">
+                <div className="flex items-center justify-between border-b border-border/50 pb-3">
+                  <h3 className="font-display text-xl font-bold text-foreground">
+                    {loc.branchName}
+                  </h3>
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary">
+                    {loc.city}
+                  </span>
                 </div>
-                <div>
-                  <div className="font-display font-semibold text-foreground mb-1">Phone</div>
-                  <a href="tel:+919625665226" className="text-muted-foreground hover:text-primary transition-colors">
-                    +91 96256 65226
+
+                {/* Address */}
+                <div className="flex items-start gap-3 text-muted-foreground text-sm leading-relaxed">
+                  <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium text-foreground">{loc.address}</p>
+                    <p>{loc.fullCityState}</p>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-center gap-3 text-muted-foreground text-sm">
+                  <Phone className="w-4 h-4 text-primary shrink-0" />
+                  <a href={`tel:${loc.phone}`} className="hover:text-primary transition-colors">
+                    {loc.phone}
                   </a>
+                </div>
+
+                {/* Hours */}
+                <div className="flex items-start gap-3 text-muted-foreground text-sm">
+                  <Clock className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                  <span>{loc.hours}</span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <Mail className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <div className="font-display font-semibold text-foreground mb-1">Email</div>
-                  <a
-                    href="mailto:drsandeepdentalhub@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    drsandeepdentalhub@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <div className="font-display font-semibold text-foreground mb-1">Location</div>
-                  <a
-                    href="https://maps.google.com/?q=H-16,+Ground+Floor,+173,+Ratiya+Marg,+Hera+Public+School,+Near+Jain+Mandir,+Sangam+Vihar,+New+Delhi,+Delhi+110080"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    H-16, Ground Floor, 173, Ratiya Marg,
-                    <br />
-                    Hera Public School, Near Jain Mandir,
-                    <br />
-                    Sangam Vihar, New Delhi, Delhi 110080
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <Clock className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <div className="font-display font-semibold text-foreground mb-1">Office Hours</div>
-                  <p className="text-muted-foreground">
-                    Mon – Sat: 9:00 AM – 5:00 PM & 6:00 PM – 9:00 PM
-                    <br />
-                    Sunday: 9:00 AM – 9:00 PM
-                  </p>
-                </div>
+              {/* Action Buttons */}
+              <div className="pt-2">
+                <a
+                  href={loc.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card text-foreground text-xs font-semibold hover:bg-secondary transition-colors"
+                >
+                  <span>Open in Google Maps</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Bottom: Appointment Booking Form */}
+        <div id="book-appointment" className="max-w-3xl mx-auto bg-card p-8 md:p-10 rounded-2xl border border-border/60 shadow-lg">
+          <div className="text-center mb-8">
+            <h3 className="font-display text-2xl font-bold text-foreground">
+              Request a Consultation
+            </h3>
+            <p className="text-muted-foreground text-sm mt-1">
+              Fill out the form below and our team will call you to confirm your time slot.
+            </p>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-card p-8 md:p-10 rounded-2xl border border-border/50 shadow-card animate-fade-up animation-delay-200">
-            <div className="flex items-center gap-3 mb-6">
-              <Calendar className="w-6 h-6 text-primary" />
-              <h3 className="font-display text-2xl font-semibold text-foreground">Request an Appointment</h3>
+          {submitted ? (
+            <div className="text-center py-8 space-y-3">
+              <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
+              <h4 className="text-xl font-bold text-foreground">Appointment Request Received!</h4>
+              <p className="text-muted-foreground text-sm">
+                Thank you. We will reach out shortly to confirm your scheduled appointment.
+              </p>
             </div>
+          ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Name <span className="text-destructive">*</span>
+                {/* Full Name */}
+                <div className="space-y-2">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-foreground">
+                    Full Name
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                     required
+                    placeholder="e.g. Rahul Sharma"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                    Phone <span className="text-destructive">*</span>
+
+                {/* Phone Number */}
+                <div className="space-y-2">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-foreground">
+                    Phone Number
                   </label>
                   <input
                     type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                     required
+                    placeholder="+91 98765 43210"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="date" className="block text-sm font-medium text-foreground mb-2">
-                  Preferred Date <span className="text-destructive">*</span>
-                </label>
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  min={getTomorrowDate()}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                  required
-                />
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Preferred Branch Selector */}
+                <div className="space-y-2">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-foreground">
+                    Preferred Clinic Branch
+                  </label>
+                  <select
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    value={formData.branch}
+                    onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
+                  >
+                    {locations.map((loc) => (
+                      <option key={loc.id} value={loc.id}>
+                        {loc.branchName} ({loc.city})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Date */}
+                <div className="space-y-2">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-foreground">
+                    Preferred Date
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    value={formData.date}
+                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                  />
+                </div>
               </div>
 
-              <div>
-                <label htmlFor="concern" className="block text-sm font-medium text-foreground mb-2">
-                  Concern / Message
+              {/* Message */}
+              <div className="space-y-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-foreground">
+                  Dental Concern / Reason for Visit
                 </label>
                 <textarea
-                  id="concern"
-                  name="concern"
                   rows={3}
-                  value={formData.concern}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-                  placeholder="Tell us about your health concern..."
+                  placeholder="e.g. Routine cleaning, teeth whitening, or tooth pain..."
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white">
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Book via WhatsApp
-              </Button>
-
-              <p className="text-xs text-muted-foreground text-center">
-                Your appointment details will be sent via WhatsApp.
-              </p>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3.5 rounded-xl shadow hover:opacity-90 transition-opacity text-sm"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Confirm Appointment Booking</span>
+              </button>
             </form>
-          </div>
+          )}
         </div>
+
       </div>
     </section>
   );
