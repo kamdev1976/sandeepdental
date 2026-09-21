@@ -1,20 +1,84 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Dr.Sandeep Dental Hub</title>
-    <meta name="description" content="Dr.Sandeep Dental Hub<" />
-    <meta name="author" content="Dr.Sandeep Dental Hub<" />
 
-    <!-- TODO: Update og:title to match your application name -->
-    <meta property="og:title" content="Dr.Sandeep Dental Hub" />
-    <meta property="og:description" content="Dr.Sandeep Dental Hub" />
+    <!-- Search Engine & SEO Meta Tags -->
+    <title>Dr. Sandeep's Dental Hub | Best Dental Clinic in Delhi & Noida Extension</title>
+    <meta name="description" content="Expert dental care in Sangam Vihar (New Delhi) & Ambesten Twin City Walk (Noida Extension). Specializing in Dental Implants, Root Canals, Braces, Aligners & Whitening." />
+    <meta name="keywords" content="Dentist in Sangam Vihar, Dental Clinic Noida Extension, Ambesten Twin City Walk Dentist, Dr Sandeep Dental, Dental Implants Delhi, Teeth Whitening Noida" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.drsandeepdentalhub.com" />
+
+    <!-- OpenGraph Meta Tags (WhatsApp, Facebook, LinkedIn previews) -->
+    <meta property="og:title" content="Dr. Sandeep's Dental Hub - Advanced Dental Care" />
+    <meta property="og:description" content="Quality dental treatments in Sangam Vihar (New Delhi) & Ambesten Twin City Walk (Noida Extension). Book your appointment today." />
+    <meta property="og:url" content="https://www.drsandeepdentalhub.com" />
     <meta property="og:type" content="website" />
-  </head>
+    <meta property="og:image" content="https://www.drsandeepdentalhub.com/og-image.jpg" />
 
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dr. Sandeep's Dental Hub | Delhi & Noida Extension" />
+    <meta name="twitter:description" content="Advanced dental solutions including Implants, Braces, Whitening & Root Canals." />
+
+    <!-- Schema.org JSON-LD Structured Data for Google Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dentist",
+          "@id": "https://www.drsandeepdentalhub.com/#sangam-vihar",
+          "name": "Dr. Sandeep's Dental Hub - Sangam Vihar",
+          "image": "https://www.drsandeepdentalhub.com/og-image.jpg",
+          "url": "https://www.drsandeepdentalhub.com",
+          "telephone": "+91-XXXXXXXXXX",
+          "priceRange": "₹₹",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Sangam Vihar",
+            "addressLocality": "New Delhi",
+            "addressRegion": "Delhi",
+            "postalCode": "110062",
+            "addressCountry": "IN"
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "10:00",
+            "closes": "20:00"
+          }
+        },
+        {
+          "@type": "Dentist",
+          "@id": "https://www.drsandeepdentalhub.com/#noida-extension",
+          "name": "Dr. Sandeep's Dental Hub - Noida Extension",
+          "image": "https://www.drsandeepdentalhub.com/og-image.jpg",
+          "url": "https://www.drsandeepdentalhub.com",
+          "telephone": "+91-XXXXXXXXXX",
+          "priceRange": "₹₹",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Ambesten Twin City Walk, Tech Zone 4",
+            "addressLocality": "Noida Extension",
+            "addressRegion": "Uttar Pradesh",
+            "postalCode": "201306",
+            "addressCountry": "IN"
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "10:30",
+            "closes": "20:30"
+          }
+        }
+      ]
+    }
+    </script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
