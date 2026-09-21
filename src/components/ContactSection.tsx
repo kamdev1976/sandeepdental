@@ -9,7 +9,7 @@ const locations = [
     city: "New Delhi",
     address: "H-16, Ground Floor, 173, Ratiya Marg, Near Hera Public School & Jain Mandir",
     fullCityState: "Sangam Vihar, New Delhi, Delhi 110080",
-    phone: "+91 98765 43210", // Update with actual contact number
+    phone: "9625665226 ,9971427556", // Update with actual contact number
     mapUrl: "https://maps.google.com/?q=H-16+Ground+Floor+173+Ratiya+Marg+Sangam+Vihar+New+Delhi",
     hours: "Mon - Sat: 10:00 AM - 8:00 PM | Sun: By Appointment",
   },
@@ -19,7 +19,7 @@ const locations = [
     city: "Noida Extension",
     address: "Ambesten Twin City Walk, Sector 1, Extension, Bisrakh Jalalpur",
     fullCityState: "Noida, Greater Noida, Uttar Pradesh 201318",
-    phone: "+91 98765 43211", // Update with actual contact number
+    phone: "9625665226 ,9971427556", // Update with actual contact number
     mapUrl: "https://maps.app.goo.gl/4bhhQkfqMD12PKpC7?g_st=awb",
     hours: "Mon - Sat: 10:00 AM - 8:00 PM | Sun: Closed",
   },
