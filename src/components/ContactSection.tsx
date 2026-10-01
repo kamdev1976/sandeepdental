@@ -76,7 +76,7 @@ const ContactSection: React.FC = () => {
 
               <div className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-emerald-600 shrink-0" />
-                <p>Mon - Sat: 10:00 AM - 8:00 PM | Sun: By Appointment</p>
+                <p>Mon - Sat: 10:00 AM - 8:00 PM | Sun: on appointment</p>
               </div>
             </div>
 
@@ -118,7 +118,7 @@ const ContactSection: React.FC = () => {
 
               <div className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-teal-600 shrink-0" />
-                <p>Mon - Sat: 10:00 AM - 8:00 PM | Sun: Closed</p>
+                <p>Mon - Sat: 10:00 AM - 8:00 PM | Sun: on appointment</p>
               </div>
             </div>
 
